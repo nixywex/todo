@@ -1,0 +1,22 @@
+.addButton{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    background: #fff;
+    border: 0;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: 0.2s ease-out;
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+.wrapper{
+    position: relative;
+}

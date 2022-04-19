@@ -1,0 +1,103 @@
+.taskMain,
+.taskLeftBlock,
+.taskRightBlock{
+    display: flex;
+    justify-content: space-between;
+}
+
+.moreInfo{
+    p{
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: grey;
+        margin-left: 37px;
+    }
+}
+
+.taskMain{
+    margin: 10px 0;
+    height: 5vh;
+}
+
+.task{
+    padding: 10px 20px;
+    border-bottom: 1px solid grey;
+    &:hover{
+        .taskRightBlock{
+            visibility: visible;
+            opacity: 100%;
+        }
+    }
+}
+
+.taskLeftBlock{
+    align-items: center;
+    input{
+        margin-right: 20px;
+    }
+    p{
+        transition: 0.2s ease-out;
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+
+.taskRightBlock{
+    align-items: center;
+    visibility: hidden;
+    transition: 0.1s ease-out;
+    opacity: 0%;
+    p{
+        transition: 0.1s ease-out;
+
+        font-size: 25px;
+        margin-left: 20px;
+        cursor: pointer;
+
+        &:hover{
+            transition: 0.1s ease-out;
+            transform: scale(1.15);
+            
+        }
+    }
+
+
+}
+
+.import{
+    color: red
+}
+
+.task[data-important = true]{
+    color: red;
+    .taskRightBlock{
+        visibility: visible;
+        opacity: 100%;
+        p{
+            visibility: hidden;
+            opacity: 0%;
+        }
+        p[data-type = "important"]{
+            transform: scale(1.15);
+            visibility: visible;
+            opacity: 100%;
+        }
+
+    }
+    &:hover{
+        .taskRightBlock{
+            p{
+                visibility: visible;
+                opacity: 100%;  
+            }
+    }}
+
+}
+
+.task[data-complete = true]{
+    color: green;
+}

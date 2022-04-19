@@ -1,0 +1,15 @@
+.title{
+    font-size: 30px;
+    color: rgb(150, 150, 150);
+    display: inline-block;
+    font-weight: 500;
+    margin-right: 30px;
+    font-weight: bold;
+    transition: 0.2s ease-out;
+    cursor: pointer;
+}
+
+.active{
+    color: black;
+    transform: scale(1.1);
+}
