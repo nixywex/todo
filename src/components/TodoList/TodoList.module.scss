@@ -20,3 +20,55 @@
 .wrapper{
     position: relative;
 }
+.popupBody{
+    .popupFolder{
+        color: grey;
+        margin-bottom: 40px;
+        cursor: pointer;
+        transition: 0.2s ease-out;
+        &:hover{
+            color:rgb(100, 100, 100);
+            transform: translateY(-2px)
+        }
+    }
+    .popupTask{
+        cursor: pointer;
+        transition: 0.2s ease-out;
+        &:hover{
+            transform: translateY(-2px)
+        }
+    }
+    .popupDiscription{
+        border: 1px solid grey;
+        border-radius: 10px;
+        font-family: sans-serif;
+        padding: 20px;
+        color: grey;
+        resize: none;
+        width: 80%;
+        margin-bottom: 40px;
+    }
+    .popupCloseButton{
+        background: #fff;
+        border: 1px solid grey;
+        border-radius: 40px;
+        font-weight: bold;
+        padding: 10px 80px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.2s ease-out;
+
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+    .buttons{
+        display: flex;
+        justify-content: center;
+    }
+    .info{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+}

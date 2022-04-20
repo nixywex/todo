@@ -25,9 +25,11 @@ const TodoCore = () => {
 				},
 			]);
 		},
+
 		deleteTask: (id) => {
 			setTasks((prev) => prev.filter((task) => task.id != id));
 		},
+
 		changeIsImportant: (id) => {
 			setTasks((prev) =>
 				prev.map((task) => {
@@ -38,6 +40,7 @@ const TodoCore = () => {
 				})
 			);
 		},
+
 		changeIsDone: (id) => {
 			setTasks((prev) =>
 				prev.map((task) => {
@@ -48,6 +51,23 @@ const TodoCore = () => {
 				})
 			);
 		},
+
+		changeDiscription: (id, text) => {
+			tasks.forEach((task) => {
+				if (task.id == id) {
+					task.discription = text;
+				}
+			});
+		},
+
+		changeTask: (id, newTask) => {
+			tasks.forEach((task) => {
+				if (task.id == id) {
+					task.task = newTask;
+				}
+			});
+		},
+
 		changeFolder: (name, id) => {
 			let newFolder = name;
 
@@ -68,30 +88,12 @@ const TodoCore = () => {
 			);
 
 			return newFolder;
-
-			// newFolder =
-			// 	newFolder.toLocaleLowerCase() == "выполненные" ? "" : newFolder;
-			// if (
-			// 	newFolder &&
-			// 	newFolder.toLowerCase() != "активные" &&
-			// 	newFolder.toLocaleLowerCase() != "выполненные"
-			// ) {
-			// 	let index = folders.findIndex((element) => {
-			// 		return element.toLowerCase() === newFolder.toLowerCase();
-			// 	});
-			// 	if (index < 0) {
-			// 		setFolders((prev) => [...prev, newFolder]);
-			// 		console.log(folders);
-			// 	}
-			// }
-			// const copy = [...tasks];
-			// const current = copy.find((task) => task.id === id);
-			// current.folder = newFolder;
-			// setTasks(copy);
 		},
+
 		getTasks: () => {
 			return tasks;
 		},
+
 		sort: () => {
 			tasks.sort((prev, next) => {
 				if (prev.isImportant && next.isImportant) {

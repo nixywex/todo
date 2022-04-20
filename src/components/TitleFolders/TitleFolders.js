@@ -5,7 +5,7 @@ import styles from "./TitleFolders.module.scss";
 
 function TitleFolders({ activeFolder, handleFolderClick, folders }) {
 	return (
-		<div>
+		<div className={styles.titleFoldersBlock}>
 			<TitleFolder
 				activeFolder={activeFolder}
 				onFolderClick={handleFolderClick}

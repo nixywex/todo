@@ -8,6 +8,7 @@ function Task({
 	deleteClick,
 	changeIsDone,
 	changeFolder,
+	handlePopupClick,
 }) {
 	return (
 		<div
@@ -25,7 +26,13 @@ function Task({
 					<p className='taskName'>{task.task}</p>
 				</div>
 				<div className={styles.taskRightBlock}>
-					{/* <p>🔍</p> */}
+					<p
+						onClick={() => {
+							handlePopupClick(task.id);
+						}}
+					>
+						🔍
+					</p>
 					<p onClick={() => deleteClick(task.id)}>❌</p>
 					<p data-type='important' onClick={() => changeIsImportant(task.id)}>
 						⭐️
@@ -33,7 +40,9 @@ function Task({
 				</div>
 			</div>
 			<div className={styles.moreInfo}>
-				<p onClick={() => changeFolder(task.id)}>{task.folder || "Активные"}</p>
+				<p onClick={() => changeFolder(task.id, task.folder)}>
+					{task.folder || "Активные"}
+				</p>
 			</div>
 		</div>
 	);
