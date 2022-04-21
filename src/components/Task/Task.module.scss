@@ -3,6 +3,7 @@
 .taskRightBlock{
     display: flex;
     justify-content: space-between;
+    user-select:none;
 }
 
 .moreInfo{
@@ -39,6 +40,7 @@
         margin-right: 20px;
     }
     p{
+        user-select:text;
         transition: 0.2s ease-out;
         margin: 0;
         font-size: 20px;
@@ -53,7 +55,6 @@
     opacity: 0%;
     p{
         transition: 0.1s ease-out;
-
         font-size: 25px;
         margin-left: 20px;
         cursor: pointer;

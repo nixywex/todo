@@ -2,14 +2,7 @@ import React from "react";
 
 import styles from "./Task.module.scss";
 
-function Task({
-	task,
-	changeIsImportant,
-	deleteClick,
-	changeIsDone,
-	changeFolder,
-	handlePopupClick,
-}) {
+function Task({ task, methods }) {
 	return (
 		<div
 			className={styles.task}
@@ -20,7 +13,7 @@ function Task({
 				<div className={styles.taskLeftBlock}>
 					<input
 						checked={task.isComplete}
-						onChange={() => changeIsDone(task.id)}
+						onChange={() => methods.handleDoneClick(task.id)}
 						type='checkbox'
 					/>
 					<p className='taskName'>{task.task}</p>
@@ -28,19 +21,22 @@ function Task({
 				<div className={styles.taskRightBlock}>
 					<p
 						onClick={() => {
-							handlePopupClick(task.id);
+							methods.handlePopupClick(task.id);
 						}}
 					>
 						🔍
 					</p>
-					<p onClick={() => deleteClick(task.id)}>❌</p>
-					<p data-type='important' onClick={() => changeIsImportant(task.id)}>
+					<p onClick={() => methods.handleDeleteClick(task.id)}>❌</p>
+					<p
+						data-type='important'
+						onClick={() => methods.handleImportantClick(task.id)}
+					>
 						⭐️
 					</p>
 				</div>
 			</div>
 			<div className={styles.moreInfo}>
-				<p onClick={() => changeFolder(task.id, task.folder)}>
+				<p onClick={() => methods.handleFolderClick(task.id, task.folder)}>
 					{task.folder || "Активные"}
 				</p>
 			</div>

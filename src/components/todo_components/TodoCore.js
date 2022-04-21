@@ -74,9 +74,6 @@ const TodoCore = () => {
 			if (!stringChecker(newFolder)) {
 				return;
 			}
-			if (newFolder.toLowerCase() == "выполненные") {
-				newFolder = "";
-			}
 
 			setTasks((prev) =>
 				prev.map((task) => {

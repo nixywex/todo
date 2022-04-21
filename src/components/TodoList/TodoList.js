@@ -1,7 +1,7 @@
 import React from "react";
-import Task from "../Task/Task";
 import TodoCore from "../todo_components/TodoCore";
 import Popup from "../Popup/Popup";
+import Tasks from "../Tasks/Tasks";
 
 import styles from "./TodoList.module.scss";
 
@@ -25,8 +25,17 @@ function TodoList({ controller }) {
 
 	const handleFolderClick = (id, defaultValue) => {
 		const newFolder = prompt("Введите название папки: ", defaultValue);
-		core.changeFolder(newFolder, id);
-		controller.addFolder(newFolder);
+
+		if (
+			newFolder == null ||
+			newFolder.toLowerCase() == defaultValue ||
+			newFolder.toLowerCase() == "выполненные"
+		) {
+			return;
+		} else {
+			core.changeFolder(newFolder, id);
+			controller.addFolder(newFolder);
+		}
 	};
 
 	const handleAddTaskClick = (defaultValue) => {
@@ -45,20 +54,6 @@ function TodoList({ controller }) {
 
 	const handleDiscriptionChange = (id, text) => {
 		core.changeDiscription(id, text);
-	};
-
-	const generateTask = (item) => {
-		return (
-			<Task
-				handlePopupClick={handlePopupClick}
-				changeFolder={handleFolderClick}
-				changeIsDone={handleDoneClick}
-				changeIsImportant={handleImportantClick}
-				deleteClick={handleDeleteClick}
-				task={item}
-				key={item.id}
-			/>
-		);
 	};
 
 	const generatePopup = () => {
@@ -118,30 +113,24 @@ function TodoList({ controller }) {
 		);
 	};
 
+	const taskMethods = {
+		handleImportantClick,
+		handleDeleteClick,
+		handleDoneClick,
+		handleFolderClick,
+		handlePopupClick,
+	};
+
 	core.sort();
 
 	return (
 		<div className={styles.wrapper}>
 			{isPopupActive && popupTaskID ? generatePopup() : ""}
-
-			{core.getTasks().map((item) => {
-				if (activeFolder == "Активные") {
-					if (!item.isComplete) {
-						return generateTask(item, handlePopupClick);
-					}
-				} else if (activeFolder == "Выполненные") {
-					if (item.isComplete) {
-						return generateTask(item, handlePopupClick);
-					}
-				} else {
-					if (
-						item.folder.toLowerCase() == activeFolder.toLowerCase() &&
-						!item.isComplete
-					) {
-						return generateTask(item, handlePopupClick);
-					}
-				}
-			})}
+			<Tasks
+				methods={taskMethods}
+				tasks={core.getTasks()}
+				activeFolder={activeFolder}
+			/>
 			<button className={styles.addButton} onClick={handleAddTaskClick}>
 				+
 			</button>
