@@ -17,8 +17,16 @@
     padding: 40px 60px;
     background-color: #fff;
     width: 100%;
-    max-width: 500px;
+    max-width: 870px;
     border-radius:10px;
+    h1{
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 57px;
+    }
+    Input{
+        margin: 40px 0;
+    }
     .closeButton{
         position: absolute;
         top: 20px;

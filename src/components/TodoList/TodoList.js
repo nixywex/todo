@@ -4,6 +4,8 @@ import TodoCore from "../todo_components/TodoCore";
 import Popup from "../Popup/Popup";
 
 import styles from "./TodoList.module.scss";
+import Button from "../UI/Button/Button";
+import Input from "../UI/Input/Input";
 
 function TodoList({ controller }) {
 	const core = TodoCore();
@@ -71,15 +73,25 @@ function TodoList({ controller }) {
 		return (
 			<Popup trigger={isPopupActive}>
 				<div className={styles.popupBody}>
-					<h1
-						onClick={() => {
-							handleTaskChangeClick(task.id, task.task);
-							setIsPopupActive(false);
-						}}
-						className={styles.popupTask}
-					>
-						{task.task}
-					</h1>
+					<div className={styles.header}>
+						<h1
+							onClick={() => {
+								handleTaskChangeClick(task.id, task.task);
+								setIsPopupActive(false);
+							}}
+							className={styles.popupTask}
+						>
+							{task.task}
+						</h1>
+						<div className={styles.info}>
+							<p className={styles.popupIsImportant}>
+								{task.isImportant ? "⭐️" : ""}
+							</p>
+							<p className={styles.popupIsDone}>
+								{task.isComplete ? "✅" : ""}
+							</p>
+						</div>
+					</div>
 					<h3
 						onClick={() => handleFolderClick(task.id, task.folder)}
 						className={styles.popupFolder}
@@ -96,14 +108,6 @@ function TodoList({ controller }) {
 						defaultValue={task.discription}
 						placeholder={"Описание"}
 					></textarea>
-					<div className={styles.info}>
-						<p className={styles.popupIsImportant}>
-							{task.isImportant ? "Важная ⭐️" : ""}
-						</p>
-						<p className={styles.popupIsDone}>
-							{task.isComplete ? "Выполненна ✅" : ""}
-						</p>
-					</div>
 
 					<div className={styles.buttons}>
 						<button
@@ -118,12 +122,28 @@ function TodoList({ controller }) {
 		);
 	};
 
+	// const generateAddTaskPopup = () => {
+	// 	return (
+	// 		<div>
+	// 			<Popup trigger={true}>
+	// 				<div className={styles.popupBody}>
+	// 					<h1 className={styles.popupHeader}>Добавить задачу</h1>
+	// 					<Input placeholder={"Добавить задачу"} />
+	// 					<div className={styles.buttons}>
+	// 						<Button onClick={core.addTask}>Добавить</Button>
+	// 						<Button>Отменить</Button>
+	// 					</div>
+	// 				</div>
+	// 			</Popup>
+	// 		</div>
+	// 	);
+	// };
 	core.sort();
 
 	return (
 		<div className={styles.wrapper}>
+			{/* {generateAddTaskPopup()} */}
 			{isPopupActive && popupTaskID ? generatePopup() : ""}
-
 			{core.getTasks().map((item) => {
 				if (activeFolder == "Активные") {
 					if (!item.isComplete) {

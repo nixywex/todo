@@ -21,6 +21,7 @@
     position: relative;
 }
 .popupBody{
+    position: relative;
     .popupFolder{
         color: grey;
         margin-bottom: 40px;
@@ -57,18 +58,26 @@
         font-size: 20px;
         cursor: pointer;
         transition: 0.2s ease-out;
-
         &:hover{
             transform: scale(1.05);
         }
     }
     .buttons{
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
     }
     .info{
+        font-size: 32px;
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
+        p{
+            margin: 0 10px 0;
+        }
+    }
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        
     }
 }
