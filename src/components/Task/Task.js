@@ -21,13 +21,7 @@ function Task({ task, changeFolder }) {
 					<p className='taskName'>{task.task}</p>
 				</div>
 				<div className={styles.taskRightBlock}>
-					<p
-					// onClick={() => {
-					// 	handlePopupClick(task.id);
-					// }}
-					>
-						🔍
-					</p>
+					<p>🔍</p>
 					<p onClick={() => deleteTask(task.id)}>❌</p>
 					<p data-type='important' onClick={() => changeIsImportant(task.id)}>
 						⭐️

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
+import { Context } from "../../context";
+
 import TitleFolders from "../TitleFolders/TitleFolders";
 import Input from "../UI/Input/Input";
-import { Context } from "../../context";
 
 import styles from "./Header.module.scss";
 
