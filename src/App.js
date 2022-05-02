@@ -85,8 +85,12 @@ function App() {
 		return newFolder;
 	};
 
-	const sortTasks = () => {
-		tasks.sort((prev, next) => {
+	const changeActiveFolder = (name) => {
+		setActiveFolder(name);
+	};
+
+	const sortTasks = (tasksArray) => {
+		return tasksArray.sort((prev, next) => {
 			if (prev.isImportant && next.isImportant) {
 				return 0;
 			} else if (prev.isImportant && !next.isImportant) {
@@ -97,19 +101,40 @@ function App() {
 		});
 	};
 
-	const setActiveFolderHandle = (name) => {
-		setActiveFolder(name);
-	};
-
 	const addFolder = (name) => {
-		if (
-			name.toLowerCase() == "активные" ||
-			name.toLowerCase() == "выполненные"
-		) {
+		const lowerName = name.toLowerCase();
+
+		let result = false;
+		folders.forEach((folder) => {
+			if (folder.toLowerCase() == lowerName) result = true;
+		});
+
+		if (lowerName == "активные" || lowerName == "выполненные" || result) {
 			return;
 		}
+
 		setFolders((prev) => [...prev, name]);
 	};
+
+	const filterTasks = (tasksArray) => {
+		return tasksArray.filter((task) => {
+			if (activeFolder.toLowerCase() == "активные") {
+				return !task.isComplete;
+			} else if (activeFolder.toLowerCase() == "выполненные") {
+				return task.isComplete;
+			} else if (activeFolder.toLowerCase() == task.folder.toLowerCase()) {
+				return !task.isComplete;
+			}
+		});
+	};
+
+	const prepareTasks = (tasksArray) => {
+		const filteredArray = filterTasks(tasksArray);
+		const prepearedArray = sortTasks(filteredArray);
+		return prepearedArray;
+	};
+
+	const preparedTasks = prepareTasks(tasks);
 
 	return (
 		<Context.Provider
@@ -122,13 +147,13 @@ function App() {
 				changeTask,
 				changeFolder,
 				sortTasks,
-				setActiveFolderHandle,
 				addFolder,
+				changeActiveFolder,
 			}}
 		>
 			<div className={styles.wrapper}>
 				<Header folders={folders} activeFolder={activeFolder} />
-				<TodoList tasks={tasks} activeFolder={activeFolder} />
+				<TodoList tasks={preparedTasks} activeFolder={activeFolder} />
 			</div>
 		</Context.Provider>
 	);

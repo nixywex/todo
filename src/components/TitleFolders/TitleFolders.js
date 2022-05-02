@@ -3,18 +3,16 @@ import TitleFolder from "../TitleFolder/TitleFolder";
 
 import styles from "./TitleFolders.module.scss";
 
-function TitleFolders({ activeFolder, handleFolderClick, folders }) {
+function TitleFolders({ activeFolder, folders }) {
 	return (
 		<div className={styles.titleFoldersBlock}>
 			<TitleFolder
 				activeFolder={activeFolder}
-				onFolderClick={handleFolderClick}
 				className={styles.folder}
 				name='Активные'
 			/>
 			<TitleFolder
 				activeFolder={activeFolder}
-				onFolderClick={handleFolderClick}
 				className={styles.folder}
 				name='Выполненные'
 			/>
@@ -22,7 +20,6 @@ function TitleFolders({ activeFolder, handleFolderClick, folders }) {
 				return (
 					<TitleFolder
 						activeFolder={activeFolder}
-						onFolderClick={handleFolderClick}
 						key={folder}
 						className={styles.folder}
 						name={folder}

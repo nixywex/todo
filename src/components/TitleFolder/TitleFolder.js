@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
+import { Context } from "../../context";
 
 import "./TitleFolder.scss";
 
-function TitleFolder({ activeFolder, name, onFolderClick }) {
+function TitleFolder({ activeFolder, name }) {
+	const { changeActiveFolder } = useContext(Context);
+
 	return (
 		<h2
 			onClick={() => {
-				onFolderClick(name);
+				changeActiveFolder(name);
 			}}
 			className={classNames({
 				title: true,

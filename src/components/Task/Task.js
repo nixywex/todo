@@ -1,14 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../context";
 
 import styles from "./Task.module.scss";
 
-function Task({
-	task,
-	changeFolder,
-	changeIsDone,
-	changeIsImportant,
-	deleteClick,
-}) {
+function Task({ task, changeFolder }) {
+	const { changeIsDone, deleteTask, changeIsImportant } = useContext(Context);
 	return (
 		<div
 			className={styles.task}
@@ -32,7 +28,7 @@ function Task({
 					>
 						🔍
 					</p>
-					<p onClick={() => deleteClick(task.id)}>❌</p>
+					<p onClick={() => deleteTask(task.id)}>❌</p>
 					<p data-type='important' onClick={() => changeIsImportant(task.id)}>
 						⭐️
 					</p>

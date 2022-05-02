@@ -5,15 +5,7 @@ import { Context } from "../../context";
 import styles from "./TodoList.module.scss";
 
 function TodoList({ activeFolder, tasks }) {
-	const {
-		addTask,
-		changeIsDone,
-		deleteTask,
-		changeIsImportant,
-		changeFolder,
-		addFolder,
-		sortTasks,
-	} = useContext(Context);
+	const { addTask, changeFolder, addFolder } = useContext(Context);
 
 	// const [isPopupActive, setIsPopupActive] = React.useState(false);
 	// const [popupTaskID, setPopupTaskID] = React.useState(null);
@@ -107,53 +99,27 @@ function TodoList({ activeFolder, tasks }) {
 	// 		</div>
 	// 	);
 	// };
-	// core.sort();
-
 	const handleAddTaskClick = (defaultValue) => {
 		addTask(prompt("Введите задачу"), activeFolder);
 	};
-
-	const generateTask = (item) => {
-		return (
-			<Task
-				// handlePopupClick={handlePopupClick}
-				changeFolder={() => {
-					const newFolder = prompt("Введите новую папку:", item.folder);
-					changeFolder(newFolder, item.id);
-					addFolder(newFolder);
-				}}
-				changeIsDone={() => changeIsDone(item.id)}
-				changeIsImportant={() => changeIsImportant(item.id)}
-				deleteClick={() => deleteTask(item.id)}
-				task={item}
-				key={item.id}
-			/>
-		);
-	};
-
-	sortTasks();
 
 	return (
 		<div className={styles.wrapper}>
 			{/* {generateAddTaskPopup()} */}
 			{/* {isPopupActive && popupTaskID ? generatePopup() : ""} */}
 			{tasks.map((item) => {
-				if (activeFolder == "Активные") {
-					if (!item.isComplete) {
-						return generateTask(item);
-					}
-				} else if (activeFolder == "Выполненные") {
-					if (item.isComplete) {
-						return generateTask(item);
-					}
-				} else {
-					if (
-						item.folder.toLowerCase() == activeFolder.toLowerCase() &&
-						!item.isComplete
-					) {
-						return generateTask(item);
-					}
-				}
+				return (
+					<Task
+						// handlePopupClick={handlePopupClick}
+						changeFolder={() => {
+							const newFolder = prompt("Введите новую папку:", item.folder);
+							changeFolder(newFolder, item.id);
+							addFolder(newFolder);
+						}}
+						task={item}
+						key={item.id}
+					/>
+				);
 			})}
 			<button className={styles.addButton} onClick={handleAddTaskClick}>
 				+
