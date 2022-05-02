@@ -24,6 +24,10 @@ function App() {
 		]);
 	};
 
+	const handleAddTaskClick = () => {
+		addTask(prompt("Введите задачу"), activeFolder);
+	};
+
 	const deleteTask = (id) => {
 		setTasks((prev) => prev.filter((task) => task.id != id));
 	};
@@ -139,7 +143,7 @@ function App() {
 	return (
 		<Context.Provider
 			value={{
-				addTask,
+				handleAddTaskClick,
 				deleteTask,
 				changeIsImportant,
 				changeIsDone,
