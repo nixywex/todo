@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import TitleFolders from "../TitleFolders/TitleFolders";
-
+import { Context } from "../../context";
 import styles from "./Header.module.scss";
 
-function Header({ controller }) {
+function Header({ folders, activeFolder }) {
+	const { setActiveFolderHandle } = useContext(Context);
 	const handleFolderClick = (name) => {
-		controller.setActiveFolderHandle(name);
+		setActiveFolderHandle(name);
 	};
 
 	return (
 		<div className={styles.header}>
 			<TitleFolders
-				folders={controller.folders}
+				folders={folders}
 				handleFolderClick={handleFolderClick}
-				activeFolder={controller.activeFolder}
+				activeFolder={activeFolder}
 			/>
 		</div>
 	);
