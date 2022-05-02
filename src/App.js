@@ -9,6 +9,7 @@ function App() {
 	const [tasks, setTasks] = React.useState([]);
 	const [activeFolder, setActiveFolder] = React.useState("Активные");
 	const [folders, setFolders] = React.useState([]);
+	const [searchValue, setSearchValue] = React.useState("");
 
 	const addTask = (task, folder) => {
 		setTasks((prev) => [
@@ -132,7 +133,16 @@ function App() {
 		});
 	};
 
+	const filterBySearch = (tasksArray, value) => {
+		return tasksArray.filter((task) =>
+			task.task.toLowerCase().includes(value.toLowerCase())
+		);
+	};
+
 	const prepareTasks = (tasksArray) => {
+		if (searchValue) {
+			tasksArray = filterBySearch(tasksArray, searchValue);
+		}
 		const filteredArray = filterTasks(tasksArray);
 		const prepearedArray = sortTasks(filteredArray);
 		return prepearedArray;
@@ -153,6 +163,8 @@ function App() {
 				sortTasks,
 				addFolder,
 				changeActiveFolder,
+				searchValue,
+				setSearchValue,
 			}}
 		>
 			<div className={styles.wrapper}>
