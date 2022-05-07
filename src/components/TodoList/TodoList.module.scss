@@ -17,6 +17,19 @@
         transform: scale(1.1);
     }
 }
+.messageDiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    .delete{
+        color: #b62f2f;
+        cursor: pointer;
+    }
+    .messageInfo{
+        color: grey;
+    }
+}
 
 .wrapper{
     position: relative;
