@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../../context";
 
 import styles from "./Task.module.scss";
 
-function Task({ task, changeFolder }) {
-	const { changeIsDone, deleteTask, changeIsImportant } = useContext(Context);
+function Task({ task }) {
+	const {
+		changeIsDone,
+		deleteTask,
+		changeIsImportant,
+		handleChangeFolder,
+		openPopup,
+	} = useContext(Context);
+
 	return (
 		<div
 			className={styles.task}
@@ -21,15 +28,33 @@ function Task({ task, changeFolder }) {
 					<p className='taskName'>{task.task}</p>
 				</div>
 				<div className={styles.taskRightBlock}>
-					<p>🔍</p>
-					<p onClick={() => deleteTask(task.id)}>❌</p>
+					<p onClick={() => openPopup("info", task)}>ℹ️</p>
+					<p
+						onClick={() =>
+							openPopup("bool", {
+								text: "Удалить задачу?",
+								trueButton: () => deleteTask(task.id),
+							})
+						}
+					>
+						❌
+					</p>
 					<p data-type='important' onClick={() => changeIsImportant(task.id)}>
 						⭐️
 					</p>
 				</div>
 			</div>
 			<div className={styles.moreInfo}>
-				<p onClick={() => changeFolder(task.id, task.folder)}>
+				<p
+					onClick={() => {
+						openPopup("input", {
+							text: "Изменить папку",
+							placeholder: "Введите название папки",
+							trueButton: handleChangeFolder,
+							args: [task.id],
+						});
+					}}
+				>
 					{task.folder || "Активные"}
 				</p>
 			</div>

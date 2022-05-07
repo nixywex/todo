@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../../context";
 
 import Task from "../Task/Task";
@@ -6,25 +6,25 @@ import Task from "../Task/Task";
 import styles from "./TodoList.module.scss";
 
 function TodoList({ tasks }) {
-	const { handleAddTaskClick, changeFolder, addFolder } = useContext(Context);
+	const { handleAddTaskClick, openPopup } =
+		useContext(Context);
 
-	const handleChangeFolderClick = (item) => {
-		const newFolder = prompt("Введите новую папку:", item.folder);
-		changeFolder(newFolder, item.id);
-		addFolder(newFolder);
-	};
 	return (
 		<div className={styles.wrapper}>
 			{tasks.map((item) => {
-				return (
-					<Task
-						changeFolder={() => handleChangeFolderClick(item)}
-						task={item}
-						key={item.id}
-					/>
-				);
+				return <Task task={item} key={item.id} />;
 			})}
-			<button className={styles.addButton} onClick={handleAddTaskClick}>
+			<button
+				className={styles.addButton}
+				onClick={() =>
+					openPopup("input", {
+						text: "Добавить задачу",
+						placeholder: "Введите задачу",
+						trueButton: handleAddTaskClick,
+						args: [],
+					})
+				}
+			>
 				+
 			</button>
 		</div>

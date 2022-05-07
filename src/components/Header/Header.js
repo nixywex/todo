@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../../context";
 
 import TitleFolders from "../TitleFolders/TitleFolders";
-import Input from "../UI/Input/Input";
+import Search from "../Search/Search";
 
 import styles from "./Header.module.scss";
 
@@ -12,12 +12,7 @@ function Header({ folders, activeFolder }) {
 	return (
 		<div className={styles.header}>
 			<TitleFolders folders={folders} activeFolder={activeFolder} />
-			<Input
-				type='search'
-				value={searchValue}
-				onChange={(event) => setSearchValue(event.target.value)}
-				placeholder={"Поиск по задачам..."}
-			/>
+			<Search searchValue = {searchValue} setSearchValue = {setSearchValue}/>
 		</div>
 	);
 }

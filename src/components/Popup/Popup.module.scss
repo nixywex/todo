@@ -16,16 +16,68 @@
     position: relative;
     padding: 40px 60px;
     background-color: #fff;
-    width: 100%;
-    max-width: 870px;
-    border-radius:10px;
+    max-width: 860px;
+    border-radius: 10px;
+
+    div[data-type = "header"]{
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    div[data-type = "buttons"]{
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     h1{
+        display: inline-block;
         font-weight: 700;
-        font-size: 50px;
+        font-size: 40px;
         line-height: 57px;
+        margin: 0;
+    }
+
+    p[data-type = "folder"]{
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 34px;
+        margin-top: 0;
+        color: #AAA9A9;
+        margin-bottom: 30px;
+    }
+    p[data-type = "icons"]{
+        display: inline-block;
+        font-size: 40px;
+        margin-left: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
+
+    }
+    textarea{
+        max-height: 150px;
+        max-width: 450px;
+        width: 100%;
+        border: 1px solid #AAA9A9;
+        border-radius: 10px;
+        padding: 20px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 29px;
+        font-family: sans-serif;
+        resize: none;
+        outline:none;
+
+    }
+    Button{
+        margin: 0 15px;
     }
     Input{
-        margin: 40px 0;
+        width: 100%;
+        margin-top: 40px;
+
     }
     .closeButton{
         position: absolute;

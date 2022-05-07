@@ -4,9 +4,14 @@
     box-sizing: border-box;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 29px;
     color: #000000;
-    padding: 10px 80px;
+    padding: 10px 70px;
+    min-width: 215px;
     cursor: pointer;
+    transition: 0.2s ease-out;
+    &:hover{
+        transform: scale(1.05);
+    }
 }

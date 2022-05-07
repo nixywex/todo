@@ -7,11 +7,12 @@ function useFolders() {
 		const lowerName = name.toLowerCase();
 
 		let result = false;
+
 		folders.forEach((folder) => {
-			if (folder.toLowerCase() == lowerName) result = true;
+			if (folder.toLowerCase() === lowerName) result = true;
 		});
 
-		if (lowerName == "активные" || lowerName == "выполненные" || result) {
+		if (lowerName === "активные" || lowerName === "выполненные" || result) {
 			return;
 		}
 

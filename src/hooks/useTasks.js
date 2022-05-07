@@ -1,9 +1,11 @@
 import React from "react";
 
-function useTasks(activeFolder, searchValue) {
+function useTasks(activeFolder, searchValue, stringValidate) {
 	const [tasks, setTasks] = React.useState([]);
 
 	const addTask = (task, folder) => {
+		if(!stringValidate(task)) return;
+
 		setTasks((prev) => [
 			...prev,
 			{
@@ -20,6 +22,7 @@ function useTasks(activeFolder, searchValue) {
 	const deleteTask = (id) => {
 		setTasks((prev) => prev.filter((task) => task.id != id));
 	};
+
 	const changeIsDone = (id) => {
 		setTasks((prev) =>
 			prev.map((task) => {
@@ -30,6 +33,7 @@ function useTasks(activeFolder, searchValue) {
 			})
 		);
 	};
+
 	const changeIsImportant = (id) => {
 		setTasks((prev) =>
 			prev.map((task) => {
@@ -40,14 +44,20 @@ function useTasks(activeFolder, searchValue) {
 			})
 		);
 	};
+
 	const changeDiscription = (id, text) => {
+		if(!stringValidate(text)) return;
+
 		tasks.forEach((task) => {
 			if (task.id == id) {
 				task.discription = text;
 			}
 		});
 	};
+
 	const changeTask = (id, newTask) => {
+		if(!stringValidate(newTask)) return;
+
 		tasks.forEach((task) => {
 			if (task.id == id) {
 				task.task = newTask;
@@ -55,8 +65,8 @@ function useTasks(activeFolder, searchValue) {
 		});
 	};
 
-	const changeFolder = (name, id) => {
-		let newFolder = name;
+	const changeFolder = (id, newFolder) => {
+		if(!stringValidate(newFolder)) return;
 
 		if (newFolder.toLowerCase() == "выполненные") {
 			newFolder = "";
@@ -73,6 +83,7 @@ function useTasks(activeFolder, searchValue) {
 
 		return newFolder;
 	};
+
 	const sortTasks = (tasksArray) => {
 		return tasksArray.sort((prev, next) => {
 			if (prev.isImportant && next.isImportant) {
@@ -84,6 +95,7 @@ function useTasks(activeFolder, searchValue) {
 			}
 		});
 	};
+
 	const filterTasks = (tasksArray) => {
 		return tasksArray.filter((task) => {
 			if (activeFolder.toLowerCase() == "активные") {
@@ -95,11 +107,13 @@ function useTasks(activeFolder, searchValue) {
 			}
 		});
 	};
+
 	const filterBySearch = (tasksArray, value) => {
 		return tasksArray.filter((task) =>
 			task.task.toLowerCase().includes(value.toLowerCase())
 		);
 	};
+
 	const prepareTasks = (tasksArray) => {
 		if (searchValue) {
 			tasksArray = filterBySearch(tasksArray, searchValue);
@@ -108,6 +122,7 @@ function useTasks(activeFolder, searchValue) {
 		const prepearedArray = sortTasks(filteredArray);
 		return prepearedArray;
 	};
+
 	return {
 		prepareTasks,
 		tasks,

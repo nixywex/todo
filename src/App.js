@@ -3,15 +3,25 @@ import { Context } from "./context";
 
 import TodoList from "./components/TodoList/TodoList";
 import Header from "./components/Header/Header";
-
-import useTasks from "./components/hooks/useTasks";
-import useFolders from "./components/hooks/useFolders";
+import Popup from "./components/Popup/Popup";
+import useTasks from "./hooks/useTasks";
+import useFolders from "./hooks/useFolders";
 
 import styles from "./index.module.scss";
+import usePopup from "./hooks/usePopup";
+import Message from "./Message/Message";
 
 function App() {
 	const [searchValue, setSearchValue] = React.useState("");
 	const [activeFolder, setActiveFolder] = React.useState("Активные");
+
+	const stringValidate = (str) => {
+		return !(!str || str.trim() === "");
+	}
+
+	const handleChangeFolderClick = (data) => {
+		openPopup("input", data);
+	};
 
 	const {
 		prepareTasks,
@@ -21,37 +31,60 @@ function App() {
 		changeIsDone,
 		changeIsImportant,
 		changeFolder,
-		changeTask,
 		changeDiscription,
-	} = useTasks(activeFolder, searchValue);
+	} = useTasks(activeFolder, searchValue, stringValidate);
 
 	const { folders, addFolder } = useFolders();
 
-	const preparedTasks = prepareTasks(tasks);
+	const {
+		isPopupActive,
+		popupInput,
+		handleAddTaskClick,
+		generatePopup,
+		handleChangeFolder,
+		openPopup,
+	} = usePopup(
+		addTask,
+		activeFolder,
+		deleteTask,
+		changeDiscription,
+		changeFolder,
+		addFolder
+	);
 
-	const handleAddTaskClick = () => {
-		addTask(prompt("Введите задачу"), activeFolder);
-	};
+
+	const preparedTasks = prepareTasks(tasks);
+	let popupContent = generatePopup();
+
+	const message = !preparedTasks.length && activeFolder !== "Выполненные" && !searchValue ? "Все задачи выполнены 🥳" :
+		!preparedTasks.length && activeFolder === "Выполненные" && !searchValue ?  "Нет выполненных задач 🙁" :
+			searchValue && !preparedTasks.length ? "Задачи не найдены 😔" : null;
 
 	return (
 		<Context.Provider
 			value={{
+				popupInput,
 				handleAddTaskClick,
 				deleteTask,
 				changeIsImportant,
 				changeIsDone,
 				changeDiscription,
-				changeTask,
 				changeFolder,
 				addFolder,
 				setActiveFolder,
 				searchValue,
 				setSearchValue,
+				handleChangeFolderClick,
+				handleChangeFolder,
+				openPopup,
+				activeFolder,
 			}}
 		>
 			<div className={styles.wrapper}>
 				<Header folders={folders} activeFolder={activeFolder} />
+				{message ? <Message>{message}</Message> : null}
 				<TodoList tasks={preparedTasks} activeFolder={activeFolder} />
+				{popupContent ? <Popup trigger={isPopupActive}> {popupContent}</Popup> : null}
 			</div>
 		</Context.Provider>
 	);
