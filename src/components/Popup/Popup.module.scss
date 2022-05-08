@@ -18,7 +18,7 @@
     background-color: #fff;
     max-width: 860px;
     border-radius: 10px;
-
+    min-width: 400px;
     div[data-type = "header"]{
         margin-top: 15px;
         display: flex;
@@ -26,10 +26,39 @@
         align-items: center;
     }
     div[data-type = "buttons"]{
-        margin-top: 50px;
+        margin-top: 50px ;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+    }
+    input[data-type = "folderCheckbox"]{
+        display: inline-block;
+        margin-right: 15px;
+    }
+    p[data-type = "folderSelect"]{
+        display: inline-block;
+        margin-right: 20px;
+        font-size: 25px;
+        color: black;
+    }
+
+    p[data-type = "folderSelect"]::before{
+        content: "-";
+        color: black;
+        margin-right: 20px;
+    }
+    p[data-type = "foldersMessage"]{
+        font-weight: bold;
+        color: grey;
+        margin-top: 40px;
+        font-size: 20px;
+    }
+    div[data-type = "folderItem"]{
+        margin: 15px 0;
+    }
+    p[data-type = "folderDelete"]{
+        display: inline-block;
+        cursor: pointer;
     }
 
     h1{
@@ -74,7 +103,7 @@
     Button{
         margin: 0 15px;
     }
-    Input{
+    Input[data-type="input"]{
         width: 100%;
         margin-top: 40px;
 
