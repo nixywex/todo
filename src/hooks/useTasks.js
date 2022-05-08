@@ -123,6 +123,17 @@ function useTasks(activeFolder, searchValue, stringValidate) {
     return prepearedArray;
   };
 
+  const changeFolders = (name) => {
+    setTasks((prev) =>
+      prev.map((task) => {
+        if (task.folder == name) {
+          task.folder = "Активные";
+        }
+        return task;
+      })
+    );
+  };
+
   return {
     prepareTasks,
     tasks,
@@ -133,6 +144,7 @@ function useTasks(activeFolder, searchValue, stringValidate) {
     changeFolder,
     changeTask,
     changeDiscription,
+    changeFolders,
   };
 }
 

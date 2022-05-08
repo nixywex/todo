@@ -33,10 +33,10 @@ function App() {
     changeIsImportant,
     changeFolder,
     changeDiscription,
+    changeFolders,
   } = useTasks(activeFolder, searchValue, stringValidate);
 
-  const { folders, addFolder } = useFolders();
-
+  const { folders, addFolder, deleteFolder } = useFolders();
   const {
     isPopupActive,
     popupInput,
@@ -50,7 +50,9 @@ function App() {
     deleteTask,
     changeDiscription,
     changeFolder,
-    addFolder
+    addFolder,
+    deleteFolder,
+    changeFolders
   );
 
   const preparedTasks = prepareTasks(tasks);
