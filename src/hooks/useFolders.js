@@ -20,7 +20,6 @@ function useFolders() {
   };
 
   const deleteFolder = (name) => {
-    console.log("use", folders, name);
     setFolders((prev) => prev.filter((item) => item !== name));
   };
 

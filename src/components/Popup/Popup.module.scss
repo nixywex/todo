@@ -14,19 +14,18 @@
 }
 .popupInner{
     position: relative;
-    padding: 40px 60px;
+    padding: 60px 65px;
     background-color: #fff;
     max-width: 860px;
     border-radius: 10px;
     min-width: 400px;
     div[data-type = "header"]{
-        margin-top: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
     div[data-type = "buttons"]{
-        margin-top: 50px ;
+        margin-top: 45px ;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,9 +42,10 @@
     }
 
     p[data-type = "folderSelect"]::before{
-        content: "-";
+        content: "•";
         color: black;
         margin-right: 20px;
+        font-size: 25px;
     }
     p[data-type = "foldersMessage"]{
         font-weight: bold;
@@ -54,7 +54,13 @@
         font-size: 20px;
     }
     div[data-type = "folderItem"]{
-        margin: 15px 0;
+        margin: 0;
+        border-bottom: 1px solid grey;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 25px;
+
     }
     p[data-type = "folderDelete"]{
         display: inline-block;
@@ -68,6 +74,9 @@
         line-height: 57px;
         margin: 0;
     }
+    div [data-type="foldersList"]{
+        margin: 0;
+    }
 
     p[data-type = "folder"]{
         font-weight: 700;
@@ -75,7 +84,7 @@
         line-height: 34px;
         margin-top: 0;
         color: #AAA9A9;
-        margin-bottom: 30px;
+        margin-bottom: 45px;
     }
     p[data-type = "icons"]{
         display: inline-block;
@@ -102,10 +111,11 @@
     }
     Button{
         margin: 0 15px;
+        width: 215px;
     }
     Input[data-type="input"]{
         width: 100%;
-        margin-top: 40px;
+        margin-top: 35px;
 
     }
     .closeButton{

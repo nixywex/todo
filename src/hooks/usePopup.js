@@ -116,7 +116,7 @@ function usePopup(
               <Button onClick={() => setIsPopupActive(false)}>Отмена</Button>
               <Button
                 onClick={() =>
-                  popupData.trueButton(popupInput, popupData.args[0])
+                  popupData.trueButton(popupInput, [...popupData.args])
                 }
               >
                 OK
@@ -130,10 +130,11 @@ function usePopup(
             <div data-type="header">
               <h1>{popupData.text}</h1>
             </div>
-            {!popupData.folders.length ? (
-              <p data-type="foldersMessage">Нет пользовательских папок 🧐</p>
-            ) : null}
+
             <div data-type="foldersList">
+              {!popupData.folders.length ? (
+                <p data-type="foldersMessage">Нет пользовательских папок 🧐</p>
+              ) : null}
               {popupData.folders.map((item) => {
                 return (
                   <div data-type="folderItem" key={item}>
@@ -159,6 +160,13 @@ function usePopup(
             </div>
             <div data-type="buttons">
               <Button onClick={() => setIsPopupActive(false)}>OK</Button>
+              <Button
+                onClick={() =>
+                  popupData.trueButton(popupInput, [...popupData.args])
+                }
+              >
+                Создать папку
+              </Button>
             </div>
           </>
         );

@@ -7,7 +7,8 @@ import Search from "../Search/Search";
 import styles from "./Header.module.scss";
 
 function Header({ folders, activeFolder }) {
-  const { searchValue, setSearchValue, openPopup } = useContext(Context);
+  const { searchValue, setSearchValue, openPopup, handleChangeFolder } =
+    useContext(Context);
 
   return (
     <div className={styles.header}>
@@ -23,6 +24,15 @@ function Header({ folders, activeFolder }) {
             openPopup("folders", {
               text: "Все папки",
               folders,
+              trueButton: () => {
+                openPopup("input", {
+                  text: "Создать папку",
+                  placeholder: "Введите название папки",
+                  trueButton: handleChangeFolder,
+                  args: [],
+                });
+              },
+              args: [],
             })
           }
         >

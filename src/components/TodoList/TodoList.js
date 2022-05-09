@@ -20,7 +20,7 @@ function TodoList({ tasks }) {
             className={styles.delete}
             onClick={() =>
               openPopup("bool", {
-                text: "Удалить задачу?",
+                text: "Удалить все задачи в папке?",
                 trueButton: () => tasks.forEach((item) => deleteTask(item.id)),
               })
             }
