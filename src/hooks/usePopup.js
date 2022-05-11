@@ -6,7 +6,7 @@ function usePopup(
   addTask,
   activeFolder,
   deleteTask,
-  changeDiscription,
+  changeDescription,
   changeFolder,
   addFolder,
   deleteFolder,
@@ -93,7 +93,7 @@ function usePopup(
             </p>
             <textarea
               onChange={(event) => {
-                changeDiscription(popupData.id, event.target.value);
+                changeDescription(popupData.id, event.target.value);
               }}
               defaultValue={popupData.discription}
               placeholder="Описание задачи"

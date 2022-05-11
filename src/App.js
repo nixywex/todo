@@ -32,7 +32,7 @@ function App() {
     changeIsDone,
     changeIsImportant,
     changeFolder,
-    changeDiscription,
+    changeDescription,
     changeFolders,
     changeTask,
   } = useTasks(activeFolder, searchValue, stringValidate);
@@ -40,7 +40,6 @@ function App() {
   const { folders, addFolder, deleteFolder } = useFolders();
   const {
     isPopupActive,
-    popupInput,
     handleAddTaskClick,
     generatePopup,
     handleChangeFolder,
@@ -49,7 +48,7 @@ function App() {
     addTask,
     activeFolder,
     deleteTask,
-    changeDiscription,
+    changeDescription,
     changeFolder,
     addFolder,
     deleteFolder,
@@ -72,21 +71,15 @@ function App() {
   return (
     <Context.Provider
       value={{
-        popupInput,
         handleAddTaskClick,
         deleteTask,
         changeIsImportant,
         changeIsDone,
-        changeDiscription,
         changeFolder,
         addFolder,
-        setActiveFolder,
-        searchValue,
-        setSearchValue,
         handleChangeFolderClick,
         handleChangeFolder,
         openPopup,
-        activeFolder,
       }}
     >
       <div className={styles.wrapper}>
