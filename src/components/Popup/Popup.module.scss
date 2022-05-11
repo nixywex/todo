@@ -74,11 +74,31 @@
         line-height: 57px;
         margin: 0;
     }
+    h1[data-type = "task"]{
+        &:hover{
+            &::after{
+                opacity: 0.5;
+                content: "✎️";
+                margin-left: 10px;
+            }
+
+        }
+        cursor: pointer;
+    }
     div [data-type="foldersList"]{
         margin: 0;
     }
 
     p[data-type = "folder"]{
+        &:hover{
+            &::after{
+                opacity: 0.5;
+                content: "✎️";
+                margin-left: 10px;
+            }
+
+        }
+        cursor: pointer;
         font-weight: 700;
         font-size: 20px;
         line-height: 34px;

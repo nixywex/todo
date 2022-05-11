@@ -47,12 +47,16 @@ function Task({ task }) {
       <div className={styles.moreInfo}>
         <p
           onClick={() => {
-            openPopup("input", {
-              text: "Изменить папку",
-              placeholder: "Введите название папки",
-              trueButton: handleChangeFolder,
-              args: [task.id],
-            });
+            openPopup(
+              "input",
+              {
+                text: "Изменить папку",
+                placeholder: "Введите название папки",
+                trueButton: handleChangeFolder,
+                args: [task.id],
+              },
+              task.folder
+            );
           }}
         >
           {task.folder || "Активные"}

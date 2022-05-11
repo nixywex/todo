@@ -10,14 +10,16 @@ function usePopup(
   changeFolder,
   addFolder,
   deleteFolder,
-  changeFolders
+  changeFolders,
+  changeTask
 ) {
   const [isPopupActive, setIsPopupActive] = React.useState(false);
   const [popupType, setPopupType] = React.useState(null);
   const [popupData, setPopupData] = React.useState(null);
   const [popupInput, setPopupInput] = React.useState("");
 
-  const openPopup = (type, data) => {
+  const openPopup = (type, data, defaultValue = "") => {
+    setPopupInput(defaultValue);
     setPopupType(type);
     setPopupData(data);
     setIsPopupActive(true);
@@ -35,6 +37,11 @@ function usePopup(
     setPopupInput("");
     addFolder(name);
   };
+  const handleChangeTask = (task, id) => {
+    changeTask(id, task);
+    setIsPopupActive(false);
+    setPopupInput("");
+  };
 
   const generatePopup = () => {
     if (!isPopupActive) {
@@ -45,13 +52,45 @@ function usePopup(
         return (
           <>
             <div data-type="header">
-              <h1>{popupData.task}</h1>
+              <h1
+                data-type="task"
+                onClick={() => {
+                  openPopup(
+                    "input",
+                    {
+                      text: "Изменить задачу",
+                      placeholder: "Введите задачу",
+                      trueButton: handleChangeTask,
+                      args: [popupData.id],
+                    },
+                    popupData.task
+                  );
+                }}
+              >
+                {popupData.task}
+              </h1>
               <div className="icons">
                 {popupData.isComplete ? <p data-type="icons">✅</p> : ""}
                 {popupData.isImportant ? <p data-type="icons">⭐️</p> : ""}
               </div>
             </div>
-            <p data-type="folder">{popupData.folder}</p>
+            <p
+              data-type="folder"
+              onClick={() => {
+                openPopup(
+                  "input",
+                  {
+                    text: "Изменить папку",
+                    placeholder: "Введите название папки",
+                    trueButton: handleChangeFolder,
+                    args: [popupData.id],
+                  },
+                  popupData.folder
+                );
+              }}
+            >
+              {popupData.folder}
+            </p>
             <textarea
               onChange={(event) => {
                 changeDiscription(popupData.id, event.target.value);

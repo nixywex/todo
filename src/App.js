@@ -34,6 +34,7 @@ function App() {
     changeFolder,
     changeDiscription,
     changeFolders,
+    changeTask,
   } = useTasks(activeFolder, searchValue, stringValidate);
 
   const { folders, addFolder, deleteFolder } = useFolders();
@@ -52,7 +53,8 @@ function App() {
     changeFolder,
     addFolder,
     deleteFolder,
-    changeFolders
+    changeFolders,
+    changeTask
   );
 
   const preparedTasks = prepareTasks(tasks);
