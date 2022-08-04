@@ -22,6 +22,7 @@ function TodoList({ tasks }) {
               openPopup("bool", {
                 text: "Удалить все задачи в папке?",
                 trueButton: () => tasks.forEach((item) => deleteTask(item.id)),
+                args: [],
               })
             }
           >

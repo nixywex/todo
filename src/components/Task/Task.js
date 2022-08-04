@@ -34,6 +34,7 @@ function Task({ task }) {
               openPopup("bool", {
                 text: "Удалить задачу?",
                 trueButton: () => deleteTask(task.id),
+                args: [],
               })
             }
           >

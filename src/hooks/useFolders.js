@@ -2,6 +2,9 @@ import React from "react";
 
 function useFolders() {
   const [folders, setFolders] = React.useState([]);
+  // setFolders(
+  //   localStorage.tolders ? JSON.parse(localStorage.getItem("folders")) : []
+  // );
 
   const addFolder = (name) => {
     const lowerName = name.toLowerCase();

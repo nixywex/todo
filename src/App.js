@@ -10,7 +10,7 @@ import useTasks from "./hooks/useTasks";
 import useFolders from "./hooks/useFolders";
 import usePopup from "./hooks/usePopup";
 
-import styles from "./index.module.scss";
+import "./index.scss";
 
 function App() {
   const [searchValue, setSearchValue] = React.useState("");
@@ -38,6 +38,7 @@ function App() {
   } = useTasks(activeFolder, searchValue, stringValidate);
 
   const { folders, addFolder, deleteFolder } = useFolders();
+
   const {
     isPopupActive,
     handleAddTaskClick,
@@ -80,9 +81,11 @@ function App() {
         handleChangeFolderClick,
         handleChangeFolder,
         openPopup,
+        setActiveFolder,
+        setSearchValue,
       }}
     >
-      <div className={styles.wrapper}>
+      <div className="wrapper">
         <Header folders={folders} activeFolder={activeFolder} />
         {message ? <Message>{message}</Message> : null}
         <TodoList tasks={preparedTasks} activeFolder={activeFolder} />

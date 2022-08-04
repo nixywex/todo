@@ -3,6 +3,9 @@ import React from "react";
 function useTasks(activeFolder, searchValue, stringValidate) {
   const [tasks, setTasks] = React.useState([]);
 
+  // localStorage.setItem("tasks", JSON.stringify(tasks));
+  // setTasks(localStorage.tasks ? JSON.parse(localStorage.getItem("tasks")) : []);
+
   const addTask = (task, folder) => {
     if (!stringValidate(task)) return;
 
@@ -13,20 +16,20 @@ function useTasks(activeFolder, searchValue, stringValidate) {
         isImportant: false,
         isComplete: false,
         folder: folder === "Выполненные" ? "Активные" : folder || "Активные",
-        discription: "",
+        description: "",
         id: Date.now(),
       },
     ]);
   };
 
   const deleteTask = (id) => {
-    setTasks((prev) => prev.filter((task) => task.id != id));
+    setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
   const changeIsDone = (id) => {
     setTasks((prev) =>
       prev.map((task) => {
-        if (task.id == id) {
+        if (task.id === id) {
           task.isComplete = !task.isComplete;
         }
         return task;
@@ -37,7 +40,7 @@ function useTasks(activeFolder, searchValue, stringValidate) {
   const changeIsImportant = (id) => {
     setTasks((prev) =>
       prev.map((task) => {
-        if (task.id == id) {
+        if (task.id === id) {
           task.isImportant = !task.isImportant;
         }
         return task;
@@ -45,21 +48,24 @@ function useTasks(activeFolder, searchValue, stringValidate) {
     );
   };
 
-  const changeDiscription = (id, text) => {
+  const changeDescription = (id, text) => {
     if (!stringValidate(text)) return;
 
-    tasks.forEach((task) => {
-      if (task.id == id) {
-        task.discription = text;
-      }
-    });
+    setTasks((prev) =>
+      prev.map((task) => {
+        if (task.id === id) {
+          task.description = text;
+        }
+        return task;
+      })
+    );
   };
 
   const changeTask = (id, newTask) => {
     if (!stringValidate(newTask)) return;
 
     tasks.forEach((task) => {
-      if (task.id == id) {
+      if (task.id === id) {
         task.task = newTask;
       }
     });
@@ -68,13 +74,13 @@ function useTasks(activeFolder, searchValue, stringValidate) {
   const changeFolder = (id, newFolder) => {
     if (!stringValidate(newFolder)) return;
 
-    if (newFolder.toLowerCase() == "выполненные") {
+    if (newFolder.toLowerCase() === "выполненные") {
       newFolder = "";
     }
 
     setTasks((prev) =>
       prev.map((task) => {
-        if (task.id == id) {
+        if (task.id === id) {
           task.folder = newFolder;
         }
         return task;
@@ -98,11 +104,11 @@ function useTasks(activeFolder, searchValue, stringValidate) {
 
   const filterTasks = (tasksArray) => {
     return tasksArray.filter((task) => {
-      if (activeFolder.toLowerCase() == "активные") {
+      if (activeFolder.toLowerCase() === "активные") {
         return !task.isComplete;
-      } else if (activeFolder.toLowerCase() == "выполненные") {
+      } else if (activeFolder.toLowerCase() === "выполненные") {
         return task.isComplete;
-      } else if (activeFolder.toLowerCase() == task.folder.toLowerCase()) {
+      } else if (activeFolder.toLowerCase() === task.folder.toLowerCase()) {
         return !task.isComplete;
       }
     });
@@ -119,14 +125,13 @@ function useTasks(activeFolder, searchValue, stringValidate) {
       tasksArray = filterBySearch(tasksArray, searchValue);
     }
     const filteredArray = filterTasks(tasksArray);
-    const prepearedArray = sortTasks(filteredArray);
-    return prepearedArray;
+    return sortTasks(filteredArray);
   };
 
   const changeFolders = (name) => {
     setTasks((prev) =>
       prev.map((task) => {
-        if (task.folder == name) {
+        if (task.folder === name) {
           task.folder = "Активные";
         }
         return task;
@@ -143,7 +148,7 @@ function useTasks(activeFolder, searchValue, stringValidate) {
     changeIsImportant,
     changeFolder,
     changeTask,
-    changeDiscription,
+    changeDescription,
     changeFolders,
   };
 }
