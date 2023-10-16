@@ -1,6 +1,6 @@
 # React-todo
 
-A list of tasks, with the distribution of tasks into folders, highlighting important tasks, adding descriptions to tasks and other features.
+A list of tasks with the ability to organize tasks into folders, highlight important tasks and add task descriptions and other features.
 
 ## Used technologies
 
